@@ -1,11 +1,13 @@
-//dom
+
+
+// DOM
 let personaje = document.getElementById("personajes");
 let resultado = document.getElementById("resultado");
 let boton = document.getElementById("btn");
 let imagen = document.getElementById("imagen_potato1");
 let intento = document.getElementById("intentos");
-
-//variables
+let ventanaFin = document.getElementById("ventanaFin");
+// Variables
 let listaPersonajes = [
     "Woody",
     "Buzz Lightyear",
@@ -17,74 +19,78 @@ let listaPersonajes = [
     "Slinky Dog",
     "Aliens",
 ];
-let cont = 0;
+let cont=0;
 let intentos = 0;
 let quedan = 10;
 let vida = 5;
+let listaEncontrados = [null,null,null,null,null,null,null,null,null];
 
-
-
-//funcion parea comprobar si existe o no el personaje en el array
+// Función para comprobar si existe o no el personaje en el array
 function comprobar() {
-    //primero obtengo el valor introducido por el usuario
+    // Obtengo el valor introducido por el usuario
     let personajeIngresado = personaje.value;
 
-    let encontrado = false; //es para que no se produzca el error de que se sobrescriba  la variable resultado
+    let encontrado = false;
 
-    //comprueba si el valor coincide con alguno del array
+    // Comprueba si el valor coincide con alguno del array y luego si se ha repetido o no
     for (let i = 0; i < listaPersonajes.length; i++) {
-
         if (personajeIngresado === listaPersonajes[i]) {
             encontrado = true;
-            cont++;
-            imagen = document.getElementById("imagen_potato" + cont);
-            imagen.style.opacity = "1";
-            //aquí los muestra cuando acierta
-            listaPersonajes[i]=null;
+            imagen = document.getElementById("imagen_potato" + (i+1));
             
+            //Si el personaje no esta en la listaEncontrados muestra una imagen
+            if (listaEncontrados[i] === null) {
+                 resultado.textContent = "Sí existe: " + personajeIngresado;
+                 let alien = document.getElementById("alien");
+                 alien.src = "img_potato/alien_sorprendido.png";
+                 imagen.style.opacity = "1"; // Muestra la imagen cuando acierta
+                 listaEncontrados[i] = personajeIngresado;//lo meto en la lista
+                 cont++;
+                 console.log( listaEncontrados+ cont);
+                 
+
+                 
+            } else {
+                resultado.textContent = "Sí existe pero ya lo has dicho" ;
+                alien.src = "img_potato/alien_triste.png";
+            }
         }
     }
-    //imprime si existe o no el nombre en el array y cambia el alien
-    if (encontrado) {
-        resultado.textContent = "Sí existe " + personajeIngresado;
-        let alien = document.getElementById("alien");
-        alien.src = "img_potato/alien_sorprendido.png";
-    } else {
-        resultado.textContent = "No existe " + personajeIngresado;
+
+    // Imprime si no existe el nombre en el array y cambia el alien a triste
+    if (encontrado===false) {
+        resultado.textContent = "No existe: " + personajeIngresado;
         vida--;
         document.getElementById("vida").textContent = "Vida: " + vida;
         alien.src = "img_potato/alien_triste.png";
-
     }
+
     intentos++;
     intento.textContent = "Intentos: " + intentos;
 }
 
-//función para ver si quedan más intentos, si no hay, no funciona
-function intentarAdivinar() {
-    if (vida > 0) {
-        comprobar();
-    } else {
-        resultado.textContent = "Se acabaron los intento";
-    }
-}
-/*
-//resetea el contador de vida y también hay un bucle que hace que todas las imágenes vuelvan a ser invisibles
-function otraVez() {
-    vida = 5;
-    quedan = 10;
-    document.getElementById("vida").textContent = "Vida: " + vida;
-    for (let i = 1; i <= 9; i++) {
-        let imagenInvisible = document.getElementById("imagen_potato" + i);
-        imagenInvisible.style.opacity = "0";
-    }
-}
-*/
 
-//adjunto la acción al botón de adivinar
+// Función para ver si quedan más intentos, si no hay, no funciona
+function intentarAdivinar() {
+    if ( vida > 0 ) {
+        comprobar();
+    } else if(vida===0){
+        resultado.textContent = "Se acabaron los intentos";
+    } 
+    if(cont>=9){
+        resultado.textContent = "Has ganado";
+        ventanaFin.style.opacity="1";
+        lanzarConfeti();
+    }
+}
+
+// Adjunto la acción al botón de adivinar
 boton.addEventListener("click", intentarAdivinar);
 
-/*
-let intentarOtraVez = document.getElementById("intentarOtraVez");
-intentarOtraVez.addEventListener("click", otraVez);
-*/
+function lanzarConfeti() {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
