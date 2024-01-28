@@ -86,6 +86,11 @@ function intentarAdivinar() {
 
 // Adjunto la acción al botón de adivinar
 boton.addEventListener("click", intentarAdivinar);
+personaje.addEventListener("keyup", function (event) {
+    if (event.key == "Enter") {
+        intentarAdivinar();
+    }
+});
 
 function lanzarConfeti() {
     confetti({
