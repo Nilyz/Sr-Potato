@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url("img_potato/fondo_toy_story.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 100px;
+    font-family: 'Bangers', sans-serif;
+    position: relative;
+
+}
+main{
+   position: relative;
+   padding-bottom: 100px;
+   
+}
+h1{
+    text-align: center;
+    font-size: 5em;
+    margin-bottom: 50px;
+    color: #ffd700;
+    -webkit-text-stroke: 3px #2052d2;
+    letter-spacing: 7px;
+    font-weight: 900;
+}
+/*contenedor de señor potato*/
+.contenedor_marco{
+    width: 650px;
+    height: 650px;
+    margin-left: 45%;
+    overflow: hidden;
+    position: relative;
+}
+.marco img{
+    width: 650px;
+    height: 650px;
+    position: absolute;
+}
+.contenedor_imagenes{
+    width:500px;
+    height: 500px;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 25px;
+    position: absolute;
+    margin-top: 12%;
+    margin-left: 12%;
+    
+}
+.img_potato{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+    width: 450px;
+}
+.img_potato img{
+    height: 150px;
+    width: 150px;
+    opacity: 0;
+}
+
+
+/*contenedor alien*/
+.contenedor_alien{
+    position: absolute;
+    height: 500px;
+    width: 500px;
+    padding-top: 10px;
+    bottom: 15px;
+    left: 100px;
+}
+.foto_alien{
+    width: 330px;
+    height: 310px;
+}
+.foto_alien img{
+    height: 350px;
+}
+#resultado{
+    background-color: rgb(255, 255, 255);
+    height: 150px;
+    width: 300px;
+    margin-left: 200px;
+    border-radius: 360px;
+    text-align: center;
+    padding-top: 45px;
+    font-size: 1.5em;
+ 
+}
+/*contador rondas*/
+.contador_rondas{
+    width: 650px;
+    height: 50px;
+    border: 2px solid black;
+    margin-left: 45%;
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+}
+.contenedor_input{
+    border: 2px solid black;
+    width: 650px;
+    height: 100px;
+    margin-left: 45%;
+}
+
+#vida, #intentos{
+
+}
+
+#ventanaFin{
+    height: 350px;
+    width: 550px;
+    background-color: rgba(173, 22, 22, 0.829);
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    opacity: 0;
+    font-size: 5em;
+    text-align: center;
+    padding-top: 130px;
+    color: #ffd700;
+}
